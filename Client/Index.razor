@@ -1,3 +1,4 @@
+@using Microsoft.Extensions.Localization
 @using Me.MyModule.Services
 @using Me.MyModule.Models
 
@@ -5,14 +6,15 @@
 @inherits ModuleBase
 @inject IMyModuleService MyModuleService
 @inject NavigationManager NavigationManager
+@inject IStringLocalizer<Index> Localizer
 
 @if (_MyModules == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>@Localizer["Loading..."]</em></p>
 }
 else
 {
-    <ActionLink Action="Add" Security="SecurityAccessLevel.Edit" Text="Add MyModule" />
+    <ActionLink Action="Add" Security="SecurityAccessLevel.Edit" Text="Add MyModule" ResourceKey="Add" />
     <br />
     <br />
     @if (@_MyModules.Count != 0)
@@ -24,7 +26,7 @@ else
                 <th>Name</th>
             </Header>
             <Row>
-                <td><ActionLink Action="Edit" Parameters="@($"id=" + context.MyModuleId.ToString())" /></td>
+                <td><ActionLink Action="Edit" Parameters="@($"id=" + context.MyModuleId.ToString())" ResourceKey="Edit" /></td>
                 <td><ActionDialog Header="Delete MyModule" Message="@("Are You Sure You Wish To Delete The " + context.Name + " MyModule?")" Action="Delete" Security="SecurityAccessLevel.Edit" Class="btn btn-danger" OnClick="@(async () => await Delete(context))" /></td>
                 <td>@context.Name</td>
             </Row>
@@ -32,47 +34,13 @@ else
     }
     else
     {
-        <p>No MyModules To Display</p>
+        <p>@Localizer["NothingToDisplay"]</p>
     }
 }
 
-<!-- The content below is for informational purposes only and can be safely removed -->
-
-<hr />
-MyModule Module Created Successfully. Use Edit Mode To Add A MyModule. You Can Access The Files At The Following Locations:<br /><br />
-D:\Data\Programme\Oqtane\Me.MyModule\Client\<br />
-- Me.MyModule.Client.csproj - client project<br />
-- _Imports.razor - global imports for module components<br />
-- Edit.razor - component for adding or editing content<br />
-- Index.razor - main component for your module **the content you are reading is in this file**<br />
-- ModuleInfo.cs - implements IModule interface to provide configuration settings for your module<br />
-- Settings.razor - component for managing module settings<br />
-- Services\IMyModuleService.cs - interface for defining service API methods<br />
-- Services\MyModuleService.cs - implements service API interface methods<br /><br />
-D:\Data\Programme\Oqtane\Me.MyModule\Package\<br />
-- Me.MyModule.nuspec - nuget manifest for packaging module<br />
-- Me.MyModule.Package.csproj - packaging project<br />
-- debug.cmd - copies assemblies to Oqtane bin folder when in Debug mode<br />
-- release.cmd - creates nuget package and deploys to Oqtane wwwroot/modules folder when in Release mode<br /><br />
-D:\Data\Programme\Oqtane\Me.MyModule\Server\<br />
-- Me.MyModule.Server.csproj - server project<br />
-- Controllers\MyModuleController.cs - API methods implemented using a REST pattern<br />
-- Manager\MyModuleManager.cs - implements optional module interfaces for features such as import/export of content<br />
-- Repository\IMyModuleRepository.cs - interface for defining repository methods<br />
-- Repository\MyModuleRespository.cs - implements repository interface methods for data access using EF Core<br />
-- Repository\MyModuleContext.cs - provides a DB Context for data access<br />
-- Scripts\Me.MyModule.1.0.0.sql - database schema definition script<br />
-- Scripts\Me.MyModule.Uninstall.sql - database uninstall script<br />
-- wwwroot\Module.css - module style sheet<br /><br />
-D:\Data\Programme\Oqtane\Me.MyModule\Shared\<br />
-- Me.MyModule.csproj - shared project<br />
-- Models\MyModule.cs - model definition<br /><br />
-
-<!-- The content above is for informational purposes only and can be safely removed -->
-
 @code {
     public override List<Resource> Resources => new List<Resource>()
-    {
+{
         new Resource { ResourceType = ResourceType.Stylesheet, Url = ModulePath() + "Module.css" },
         new Resource { ResourceType = ResourceType.Script, Url = ModulePath() + "Module.js" }
     };
