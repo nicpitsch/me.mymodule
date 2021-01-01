@@ -120,6 +120,9 @@
   <data name="Add.Text" xml:space="preserve">
     <value>Add new MyModule (localized)</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel (localized)</value>
+  </data>
   <data name="Edit.Text" xml:space="preserve">
     <value>Edit MyModule (localized)</value>
   </data>

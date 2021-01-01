@@ -14,7 +14,15 @@
 }
 else
 {
-    <ActionLink Action="Add" Security="SecurityAccessLevel.Edit" Text="Add MyModule" ResourceKey="Add" />
+    <blockquote class="blockquote">
+        <h5>ActionLink (Oqtane):</h5>
+        <ActionLink Action="Add" Security="SecurityAccessLevel.View" Text="Add MyModule" ResourceKey="Add" />
+    </blockquote>
+    <br />
+    <blockquote class="blockquote">
+        <h5>NavLink (AspNetCore):</h5>
+        <NavLink class="btn btn-secondary" href="#">@Localizer["Cancel"]</NavLink>
+    </blockquote>
     <br />
     <br />
     @if (@_MyModules.Count != 0)
