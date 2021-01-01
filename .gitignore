@@ -1,0 +1,11 @@
+﻿*.user
+msbuild.binlog
+*.binlog
+*.nupkg
+*.suo
+
+.vs/
+bin/
+obj/
+artifacts/
+.vscode/
