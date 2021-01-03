@@ -6,7 +6,7 @@
 @inherits ModuleBase
 @inject IMyModuleService MyModuleService
 @inject NavigationManager NavigationManager
-@inject IStringLocalizer<Index> Localizer
+@inject IStringLocalizer<ModuleInfo> Localizer
 
 @if (_MyModules == null)
 {
@@ -16,7 +16,7 @@ else
 {
     <blockquote class="blockquote">
         <h5>ActionLink (Oqtane):</h5>
-        <ActionLink Action="Add" Security="SecurityAccessLevel.View" Text="Add MyModule" ResourceKey="Add" />
+        <ActionLink Action="Add" Security="SecurityAccessLevel.View" Text="@Localizer["Add.Text"]" />
     </blockquote>
     <br />
     <blockquote class="blockquote">
